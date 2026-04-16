@@ -44,6 +44,63 @@ void imprimirLista(No* head) {
     cout << "NULL" << endl;
 }
 
+void imprimirReverso(No* head) {
+    if (head == nullptr) {
+        return;
+    }
+    imprimirReverso(head->proximo);
+    cout << head->valor << "(" << head << ")" << " -> ";
+}
+
+void inserirApos(No* head, int valor_anterior, int valor){
+    No* atual = head;
+    while (atual != nullptr && atual->valor != valor_anterior) {
+        atual = atual->proximo;
+    }
+    if (atual == nullptr) {
+        cout << "Valor anterior nao encontrado!" << endl;
+        return;
+    }
+    No* novo = new No();
+    novo->valor = valor;
+    novo->proximo = atual->proximo;
+    atual->proximo = novo;
+}
+
+int buscarNaLista(No* head, int valor) {
+    No* atual = head;
+    while (atual != nullptr) {
+        if (atual->valor == valor) {
+            return true;
+        }
+        atual = atual->proximo;
+    }
+    return false;
+}
+
+void removerDaLista(No* &head, int valor) {
+    if (head == nullptr) {
+        return;
+    }
+    if (head->valor == valor) {
+        No* temp = head;
+        head = head->proximo;
+        delete temp;
+        return;
+    }
+    No* atual = head;
+    while (atual->proximo != nullptr && atual->proximo->valor != valor) {
+        atual = atual->proximo;
+    }
+    if (atual->proximo == nullptr) {
+        cout << "Valor nao encontrado!" << endl;
+        return;
+    }
+    No* temp = atual->proximo;
+    atual->proximo = temp->proximo;
+    delete temp;
+}
+
 int main() {
     No* head = nullptr;
     
@@ -76,6 +133,23 @@ int main() {
                 break;
             case 2:
                 imprimirLista(head);
+                break;
+            case 3:
+                imprimirReverso(head);
+                cout << "NULL" << endl;
+                break;
+            case 4:
+                int valor_anterior;
+                cout << "Digite o valor apos o qual deseja inserir: ";
+                cin >> valor_anterior;
+                cout << "Digite o valor para inserir: ";
+                cin >> valor;
+                inserirApos(head, valor_anterior, valor);
+                break;
+            case 6:
+                cout << "Digite o valor a remover: ";
+                cin >> valor;
+                removerDaLista(head, valor);
                 break;
             case 10:
                 cout << "Saindo..." << endl;
