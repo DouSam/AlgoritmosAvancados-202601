@@ -101,6 +101,16 @@ void removerDaLista(No* &head, int valor) {
     delete temp;
 }
 
+void limparLista(No* &head) {
+    No* atual = head;
+    while (atual != nullptr) {
+        No* temp = atual;
+        atual = atual->proximo;
+        delete temp;
+    }
+    head = nullptr;
+}
+
 int main() {
     No* head = nullptr;
     
@@ -114,6 +124,7 @@ int main() {
         cout << "4. Inserir apos" << endl;
         cout << "5. Buscar na lista" << endl;
         cout << "6. Remover da lista" << endl;
+        cout << "7. Limpar a lista" << endl;
         cout << "10. Sair" << endl;
         cout << "Escolha uma opcao: ";
         cin >> opcao;
@@ -150,6 +161,10 @@ int main() {
                 cout << "Digite o valor a remover: ";
                 cin >> valor;
                 removerDaLista(head, valor);
+                break;
+            case 7:
+                limparLista(head);
+                cout << "Lista limpa!" << endl;
                 break;
             case 10:
                 cout << "Saindo..." << endl;
