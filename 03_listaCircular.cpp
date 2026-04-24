@@ -6,18 +6,18 @@ struct No {
     No *proximo; 
 };
 
-void inserirCircular(No* &head, int valor) {
+void inserirCircular(No* &head, int valorNovoNo) {
     No* novo = new No();
-    novo->valor = valor;
+    novo->valor = valorNovoNo;
     if (head == nullptr) {
         head = novo;
         head->proximo = head; // Aponta para si mesmo
     } else {
-        No* temp = head;
-        while (temp->proximo != head) { // Encontra o último nó
-            temp = temp->proximo;
+        No* atual = head;
+        while (atual->proximo != head) { // Encontra o último nó
+            atual = atual->proximo;
         }
-        temp->proximo = novo; // Último nó aponta para o novo nó
+        atual->proximo = novo; // Último nó aponta para o novo nó
         novo->proximo = head; // Novo nó aponta para o início
     }
 }

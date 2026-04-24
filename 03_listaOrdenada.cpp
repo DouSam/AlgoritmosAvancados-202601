@@ -43,8 +43,8 @@ int main() {
 
     inserirOrdenado(head, 30);
     inserirOrdenado(head, 10);
+    inserirOrdenado(head, 35);
     inserirOrdenado(head, 20);
-    inserirOrdenado(head, 25);
 
     imprimirLista(head);
 

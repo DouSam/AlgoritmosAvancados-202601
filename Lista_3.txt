@@ -1,0 +1,12 @@
+Exercício 1: Dadas duas listas simplesmente encadeadas, L e P, onde P contém inteiros ordenados de forma crescente. A operação printLots(L, P) deve imprimir os elementos de L que estão nas posições especificadas pelos valores em P.
+
+Exercício 2: Implemente uma função que troque a posição de dois nós adjacentes em uma Lista Duplamente Encadeada. A função deve receber, head, tail e o valor do nó que será trocado com o próximo.
+A Restrição: É estritamente proibido trocar os valores (data ou valor) dentro dos nós. A troca deve ser feita exclusivamente reajustando os ponteiros anterior e proximo
+
+Exercício 3: Dadas duas listas encadeadas ordenadas de forma crescente, L1 e L2, escreva uma função que crie uma terceira lista contendo apenas os elementos que estão presentes em ambas as listas (intersecção).
+
+Exercício 4: Crie uma lista e uma função que receba uma quantidade x de nós e precisa percorrer essa quantidade n vezes, imprimindo o valor desse nó. 
+
+Exercício 5: Adicione uma operação splice(No* posicao, Lista &outraLista) na sua classe de Lista Duplamente Encadeada. A função deve "arrancar" todos os nós da outraLista e inseri-los de uma só vez na lista atual, logo antes do nó indicado pelo ponteiro posicao.
+
+Entrega: 29/04
