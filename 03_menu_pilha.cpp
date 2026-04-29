@@ -7,7 +7,7 @@ struct No {
 };
 
 int main() {
-    No* head = nullptr;
+    No* topo = nullptr;
     
     int opcao, valor;
     do {
