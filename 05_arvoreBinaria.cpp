@@ -150,5 +150,18 @@ int main() {
     posOrdem(raiz);
     cout << endl;
 
+    cout << "Maior elemento: " << findMax(raiz)->element << endl;
+    cout << "Menor elemento: " << findMin(raiz)->element << endl;
+
+    cout << "Removendo 70..." << endl;
+    remove(70, raiz);
+
+    cout << "Arvore impressa Em-Ordem após remoção:" << endl;
+    emOrdem(raiz);
+
+    remove(20, raiz);
+    cout << "Arvore impressa Em-Ordem após remoção de 20:" << endl;
+    emOrdem(raiz);
+
     return 0;
 }
