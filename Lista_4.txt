@@ -1,0 +1,10 @@
+Desafio 1: Escrevam funções que recebam apenas o ponteiro para a raiz (root) e calculem:
+- O número total de nós na árvore
+- O número total de nós folha (nós sem filhos)
+- O número de nós "cheios" (nós que possuem obrigatoriamente tanto o filho da esquerda quanto o da direita)
+
+Desafio 2: Escrever uma função recursiva que receba o ponteiro para a raiz e simplesmente remova todos os nós folha da árvore, retornando o ponteiro atualizado da nova raiz.
+
+Desafio 3: Escreva uma função que receba uma arvore e duas chaves, k1 e k2 (onde k1≤k2). A função deve imprimir todos os elementos da árvore que estejam dentro desse intervalo (ou seja, valores X onde k1≤X≤k2)
+
+Prazo: 20/05

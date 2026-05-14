@@ -131,12 +131,12 @@ int main() {
     BinaryNode* raiz = nullptr; // Inicializa a árvore vazia
     
     insert(50, raiz);
+    insert(25, raiz);
     insert(30, raiz);
-    insert(70, raiz);
     insert(20, raiz);
-    insert(40, raiz);
     insert(60, raiz);
-    insert(80, raiz);
+    insert(55, raiz);
+    insert(70, raiz);
     
     cout << "Arvore impressa Em-Ordem:" << endl;
     emOrdem(raiz);
@@ -149,8 +149,10 @@ int main() {
     cout << "Arvore impressa Pós-Ordem:" << endl;
     posOrdem(raiz);
     cout << endl;
+    
+    BinaryNode *maxNo = findMax(raiz);
 
-    cout << "Maior elemento: " << findMax(raiz)->element << endl;
+    cout << "Maior elemento: " << maxNo->element << endl;
     cout << "Menor elemento: " << findMin(raiz)->element << endl;
 
     cout << "Removendo 70..." << endl;
