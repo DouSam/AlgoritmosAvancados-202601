@@ -5,13 +5,13 @@ using namespace std;
 
 // 1. A Estrutura do Nó Binário
 struct BinaryNode {
-    int element;            // O dado armazenado
+    int value;              // O dado armazenado
     BinaryNode *left;       // Ponteiro para o filho da Esquerda
     BinaryNode *right;      // Ponteiro para o filho da Direita
     
     // Construtor para facilitar a alocação de memória no Heap
-    BinaryNode(int theElement, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr)
-        : element{theElement}, left{lt}, right{rt} { }
+    BinaryNode(int theValue, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr)
+        : value{theValue}, left{lt}, right{rt} { }
 };
 
 // 2. A Inserção Recursiva 
@@ -20,11 +20,11 @@ void insert(int x, BinaryNode * & t) {
         // Encontrou um espaço vazio! O nó pai agora aponta para este novo nó
         t = new BinaryNode( x, nullptr, nullptr );
     } 
-    else if( x < t->element ) {
+    else if( x < t->value ) {
         // Se o valor é menor, desce para a esquerda
         insert( x, t->left );
     } 
-    else if( t->element < x ) {
+    else if( t->value < x ) {
         // Se o valor é maior, desce para a direita
         insert( x, t->right );
     } 
@@ -37,7 +37,7 @@ void insert(int x, BinaryNode * & t) {
 // 1. PRÉ-ORDEM (Preorder): Nó -> Esquerda -> Direita
 void preOrdem(BinaryNode *t) {
     if( t != nullptr ) {
-        cout << t->element << " "; 
+        cout << t->value << " "; 
         preOrdem( t->left );       
         preOrdem( t->right );      
     }
@@ -47,7 +47,7 @@ void preOrdem(BinaryNode *t) {
 void emOrdem(BinaryNode *t) {
     if( t != nullptr ) {
         emOrdem( t->left );        
-        cout << t->element << " "; 
+        cout << t->value << " "; 
         emOrdem( t->right );       
     }
 }
@@ -57,7 +57,7 @@ void posOrdem(BinaryNode *t) {
     if( t != nullptr ) {
         posOrdem( t->left );       
         posOrdem( t->right );      
-        cout << t->element << " ";
+        cout << t->value << " ";
     }
 }
 
@@ -67,16 +67,16 @@ void posOrdem(BinaryNode *t) {
 bool contains(const int & x, BinaryNode *t) {
     if( t == nullptr ) 
         return false; // Chegou ao fim e não achou
-    else if( x < t->element ) 
+    else if( x < t->value ) 
         return contains( x, t->left );  // O alvo é menor, vai para a esquerda
-    else if( t->element < x ) 
+    else if( t->value < x ) 
         return contains( x, t->right ); // O alvo é maior, vai para a direita
     else 
-        return true; // Match! Encontrou o elemento
+        return true; // Match! Encontrou o valor
 }
 
 // ==========================================
-// 2. FIND MIN (Menor elemento - Recursivo)
+// 2. FIND MIN (Menor valor - Recursivo)
 // ==========================================
 BinaryNode* findMin(BinaryNode *t) {
     if( t == nullptr ) 
@@ -88,7 +88,7 @@ BinaryNode* findMin(BinaryNode *t) {
 }
 
 // ==========================================
-// 3. FIND MAX (Maior elemento - Iterativo)
+// 3. FIND MAX (Maior valor - Iterativo)
 // ==========================================
 BinaryNode* findMax(BinaryNode *t)  {
     if( t != nullptr ) {
@@ -107,22 +107,31 @@ void remove(const int & x, BinaryNode * & t) {
     if( t == nullptr ) 
         return; // Item não encontrado; não faz nada
         
-    if( x < t->element ) {
+    if( x < t->value ) {
         remove( x, t->left );
     } 
-    else if( t->element < x ) {
+    else if( t->value < x ) {
         remove( x, t->right );
     } 
     else if( t->left != nullptr && t->right != nullptr ) { 
         // CASO 3: O nó tem dois filhos
-        t->element = findMin( t->right )->element; // Substitui pelo menor da direita
-        remove( t->element, t->right );            // Remove o nó substituto lá embaixo
+        t->value = findMin( t->right )->value;   // Substitui pelo menor da direita
+        remove( t->value, t->right );            // Remove o nó substituto lá embaixo
     } 
     else { 
         // CASOS 1 e 2: O nó tem um filho ou é uma folha (nenhum filho)
         BinaryNode *oldNode = t;
         t = ( t->left != nullptr ) ? t->left : t->right; // Pula o nó a ser deletado
         delete oldNode; // Limpa o Heap
+    }
+}
+
+void cleanTree(BinaryNode * & t) {
+    if (t != nullptr) {
+        cleanTree(t->left);
+        cleanTree(t->right);
+        delete t;
+        t = nullptr;
     }
 }
 
@@ -137,6 +146,7 @@ int main() {
     insert(60, raiz);
     insert(55, raiz);
     insert(70, raiz);
+    insert(80, raiz);
     
     cout << "Arvore impressa Em-Ordem:" << endl;
     emOrdem(raiz);
@@ -152,18 +162,24 @@ int main() {
     
     BinaryNode *maxNo = findMax(raiz);
 
-    cout << "Maior elemento: " << maxNo->element << endl;
-    cout << "Menor elemento: " << findMin(raiz)->element << endl;
+    cout << "Maior valor: " << maxNo->value << endl;
+    cout << "Menor valor: " << findMin(raiz)->value << endl;
 
     cout << "Removendo 70..." << endl;
     remove(70, raiz);
 
     cout << "Arvore impressa Em-Ordem após remoção:" << endl;
     emOrdem(raiz);
+    cout << endl;
 
-    remove(20, raiz);
-    cout << "Arvore impressa Em-Ordem após remoção de 20:" << endl;
+    remove(25, raiz);
+    cout << "Arvore impressa Em-Ordem após remoção de 25:" << endl;
     emOrdem(raiz);
+    cout << endl;
 
+    cleanTree(raiz);
+    cout << "Lista limpa: ";
+    emOrdem(raiz);
+    
     return 0;
 }
