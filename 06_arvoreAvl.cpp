@@ -7,13 +7,13 @@ using namespace std;
 // 1. ESTRUTURA DO NÓ AVL
 // ==========================================
 struct AvlNode {
-    int element;
+    int value;
     AvlNode *left;
     AvlNode *right;
     int height;
 
     AvlNode( const int & ele, AvlNode *lt, AvlNode *rt, int h = 0 )
-      : element{ ele }, left{ lt }, right{ rt }, height{ h } { }
+      : value{ ele }, left{ lt }, right{ rt }, height{ h } { }
 };
 
 // ==========================================
@@ -69,14 +69,14 @@ void balance( AvlNode * & t ) {
         return;
         
     // Verifica se a Esquerda está mais pesada
-    if( height( t->left ) - height( t->right ) > ALLOWED_IMBALANCE ) {
+    if( height( t->left ) - height( t->right ) > 1 ) {
         if( height( t->left->left ) >= height( t->left->right ) )
             rotateWithLeftChild( t );
         else
             doubleWithLeftChild( t );
     }
     // Verifica se a Direita está mais pesada
-    else if( height( t->right ) - height( t->left ) > ALLOWED_IMBALANCE ) {
+    else if( height( t->right ) - height( t->left ) > 1 ) {
         if( height( t->right->right ) >= height( t->right->left ) )
             rotateWithRightChild( t );
         else
@@ -93,9 +93,9 @@ void balance( AvlNode * & t ) {
 void insert( const int & x, AvlNode * & t ) {
     if( t == nullptr )
         t = new AvlNode{ x, nullptr, nullptr };
-    else if( x < t->element )
+    else if( x < t->value )
         insert( x, t->left );
-    else if( t->element < x )
+    else if( t->value < x )
         insert( x, t->right );
         
     balance( t );
@@ -107,7 +107,7 @@ void insert( const int & x, AvlNode * & t ) {
 void emOrdem( AvlNode *t ) {
     if( t != nullptr ) {
         emOrdem( t->left );        
-        cout << t->element << " "; 
+        cout << t->value << " "; 
         emOrdem( t->right );       
     }
 }
@@ -115,7 +115,7 @@ void emOrdem( AvlNode *t ) {
 int main() {
     AvlNode* raiz = nullptr;
 
-    int chaves[] = {50, 30, 70, 20, 40, 60, 80, 35, 45};
+    int chaves[] = {50, 30, 80, 90, 85};
     for(int k : chaves) {
         insert(k, raiz);
     }
